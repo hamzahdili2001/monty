@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/types.h>
+#include <stdbool.h>
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -32,7 +34,20 @@ typedef struct instruction_s
         char *opcode;
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
+
+typedef struct data
+{
+	char *argument;
+	char *line;
+	FILE *bytecode_file;
+	int op;
+} data_t;
+extern data_t data;
 int run(char *line, stack_t **stack, unsigned int line_number, FILE *bytecode_file);
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
+ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
+bool is_number(const char *str, int *value);
+int error(int code, char *msg, void *arg, char type);
+void clean_s(stack_t *stack);
 #endif

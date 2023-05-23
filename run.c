@@ -1,4 +1,5 @@
 #include "monty.h"
+#include <stdlib.h>
 
 int run(char *line, stack_t **stack, unsigned int line_number, FILE *bytecode_file)
 {
@@ -7,11 +8,11 @@ int run(char *line, stack_t **stack, unsigned int line_number, FILE *bytecode_fi
 		{"pall", pall},
 		{NULL, NULL},
 	};
-	char *opcode, *argument;
+	char *opcode;
 	int result = 0, i = 0;
 
 	opcode = strtok(line, " \t\n");
-	argument = strtok(NULL, " \t\n");
+	data.argument = strtok(NULL, " \t\n");
 
 	if (opcode != NULL)
 	{
@@ -24,14 +25,15 @@ int run(char *line, stack_t **stack, unsigned int line_number, FILE *bytecode_fi
 			}
 			i++;
 		}
-
 	}
 
-	if (opcodes[i].opcode == NULL)
+	if (opcode && opcodes[i].opcode == NULL)
 	{
 		fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
+		fclose(bytecode_file);
+		free(line);
+		/* clean_s(*stack) */
+		exit(EXIT_FAILURE);
 	}
-
 	return (result);
 }
-

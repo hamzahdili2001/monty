@@ -1,6 +1,7 @@
-#include "monty.h"
 #include <stdlib.h>
-
+#define _POSIX_C_SOURCE 200809L
+#include "monty.h"
+data_t data = {NULL, NULL, NULL, 0};
 int main(int argc, const char *const argv[])
 {
 	const char *filename;
@@ -11,40 +12,27 @@ int main(int argc, const char *const argv[])
 	stack_t *stack = NULL;
 
 	if (argc != 2)
-	{
-		fprintf(stderr, "USAGE: monty file\n");
-		exit(EXIT_FAILURE);
-	}
+		error(EXIT_FAILURE, "USAGE: monty file\n", " ", 'n');
 	filename = argv[1];
 	bytecode_file = fopen(filename, "r");
-	
+	data.bytecode_file = bytecode_file;
 	if (!bytecode_file)
-	{
-		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
-		exit(EXIT_FAILURE);
-	}
-
-	while (getline(&line, &size, bytecode_file) != -1)
+		error(EXIT_FAILURE, "Error: Can't open file %s\n", (char *)argv[1], 's');
+	while (_getline(&line, &size, bytecode_file) != -1)
 	{
 		line_number++;
+		data.line = line;
 		if(run(line, &stack, line_number, bytecode_file) != 0)
-		{
-			fprintf(stderr, "Error: Failed to execute line %u\n", line_number);
-			exit(EXIT_FAILURE);
-		}
+			error(EXIT_FAILURE, "Error: Failed to execute line %u\n",
+				 (void *)&line_number, 'u');
 		free(line);
 		line = NULL;
 		size = 0;
 	}
-
 	if(ferror(bytecode_file))
-	{
-		fprintf(stderr, "Error: Failed to read file %s\n", filename);
-		exit(EXIT_FAILURE);
-	}
-
-	//clean_s(stack);
+		error(EXIT_FAILURE, "Error: Failed to read file %s\n"
+				,(char *)filename, 's');
+	clean_s(stack);
 	fclose(bytecode_file);
-
 	return (EXIT_SUCCESS);
 }
