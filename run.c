@@ -7,6 +7,9 @@ int run(char *line, stack_t **stack, unsigned int line_number, FILE *bytecode_fi
 		{"push", push},
 		{"pall", pall},
 		{"pint", pint},
+		{"pop", pop},
+		{"swap", swap},
+		{"add", add},
 		{NULL, NULL},
 	};
 	char *opcode;
