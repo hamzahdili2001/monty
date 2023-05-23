@@ -3,8 +3,12 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-
-
+/**
+ * push - pushes to the stack.
+ * @stack: stack.
+ * @line_number: line number.
+ * Return: Nothing.
+*/
 void push(stack_t **stack, unsigned int line_number)
 {
 	int value;
@@ -39,10 +43,16 @@ void push(stack_t **stack, unsigned int line_number)
 	*stack = newNode;
 }
 
+/**
+ * pall - prints all the values on the stack.
+ * @stack: stack.
+ * @line_number: line number
+ * Return: Nothing.
+*/
 void pall(stack_t **stack, unsigned int line_number)
 {
 	stack_t *current = *stack;
-	
+
 	(void)line_number;
 	while (current != NULL)
 	{

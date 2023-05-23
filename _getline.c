@@ -1,5 +1,12 @@
 #include "monty.h"
 
+/**
+ * _getline - my own implementation of getline.
+ * @lineptr: line pointer.
+ * @n: length of the line.
+ * @stream: the file.
+ * Return: length of the line.
+*/
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 {
 	ssize_t read;
@@ -9,7 +16,7 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 	if (lineptr == NULL || n == NULL || stream == NULL)
 		return (-1);
 
-  if (*lineptr == NULL)
+	if (*lineptr == NULL)
 		*n = 0;
 
 	while ((read = (ssize_t)getc(stream)) != EOF)
@@ -22,13 +29,13 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 				return (-1);
 
 			*lineptr = new_line;
-      *n = new_size;
-    }
+			*n = new_size;
+		}
 		(*lineptr)[len++] = (char)read;
 		if (read == '\n')
 			break;
 	}
-	
+
 	if (len == 0)
 		return (-1);
 

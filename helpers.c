@@ -1,7 +1,15 @@
 #include "monty.h"
+
+/**
+ * is_number - helps check the number.
+ * @str: string.
+ * @value: value.
+ * Return: True or False / 1 or 0
+*/
 bool is_number(const char *str, int *value)
 {
 	int sign = 1, result = 0;
+
 	if (str == NULL || *str == '\0')
 		return (false);
 
@@ -21,7 +29,11 @@ bool is_number(const char *str, int *value)
 	*value = result * sign;
 	return (true);
 }
-
+/**
+ * clean_s - cleans the stack (free for the stack).
+ * @stack: stack.
+ * Return: Nothing.
+*/
 void clean_s(stack_t *stack)
 {
 	stack_t *current = stack, *next;
