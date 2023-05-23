@@ -10,6 +10,7 @@ int run(char *line, stack_t **stack, unsigned int line_number, FILE *bytecode_fi
 		{"pop", pop},
 		{"swap", swap},
 		{"add", add},
+		{"nop", nop},
 		{NULL, NULL},
 	};
 	char *opcode;
