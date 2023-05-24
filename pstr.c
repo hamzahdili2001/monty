@@ -15,8 +15,8 @@ void pstr(stack_t **stack, unsigned int line_number)
 	current = *stack;
 	while (current && current->n > 0 && current->n < 128)
 	{
-		putchar(current->n);
+		printf("%c", current->n);
 		current = current->next;
 	}
-	putchar('\n');
+	printf("\n");
 }
