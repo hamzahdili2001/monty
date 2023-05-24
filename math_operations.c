@@ -42,3 +42,29 @@ void sub(stack_t **stack, unsigned int line_number)
 	(*stack)->next->n -= (*stack)->n;
 	pop(stack, line_number);
 }
+
+/**
+ * divide -  divides the second top element
+ *					of the stack by the top element of the stack.
+ * @stack: stack.
+ * @line_number: line number.
+ * Return: Nothing.
+*/
+void divide(stack_t **stack, unsigned int line_number)
+{
+	if (*stack == NULL || (*stack)->next == NULL)
+	{
+		fclose(data.bytecode_file);
+		free(data.line);
+		clean_s(*stack);
+		error(EXIT_FAILURE, "L%u: can't div, stack too short\n",
+				(void *)&line_number, 'u');
+	}
+
+	if ((*stack)->n == 0)
+	{
+		error(EXIT_FAILURE, "L%u: division by zero\n", (void *)&line_number, 'u');
+	}
+	(*stack)->next->n /= (*stack)->n;
+	pop(stack, line_number);
+}
