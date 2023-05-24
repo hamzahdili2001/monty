@@ -14,7 +14,7 @@ void pstr(stack_t **stack, unsigned int line_number)
 	(void)line_number;
 	while (current != NULL && current->n != 0)
 	{
-		if (current->n < 0 || current->n > 127)
+		if (current->n < 0 || current->n > 128)
 			break;
 
 		putchar(current->n);
