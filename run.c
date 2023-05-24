@@ -14,7 +14,7 @@ int run(char *line, stack_t **stack, unsigned int line_number,
 	instruction_t opcodes[] = {
 		{"push", push}, {"pall", pall}, {"pint", pint},
 		{"pop", pop}, {"swap", swap}, {"add", add}, {"sub", sub},
-		{"div", divide}, {"nop", nop},
+		{"div", divide}, {"nop", nop}, {"mul", mul}, {"mod", mod},
 		{NULL, NULL},
 	};
 	char *opcode;
