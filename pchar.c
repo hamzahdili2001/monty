@@ -9,11 +9,11 @@ void pchar(stack_t **stack, unsigned int line_number)
 {
 	int value = (*stack)->n;
 
-	if (!stack)
+	if (*stack == NULL || stack == NULL)
 		error(EXIT_FAILURE, "L%u: can't pchar, stack empty\n",
 				(void *)&line_number, 'u');
 
-	if (value > 127 || value < 0)
+	if (value < 0 || value >= 128)
 		error(EXIT_FAILURE, "L%u: can't pchar, value out of range\n",
 				(void *)&line_number, 'u');
 
