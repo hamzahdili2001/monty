@@ -18,6 +18,7 @@ int run(char *line, stack_t **stack, unsigned int line_number,
 		{"pop", pop},
 		{"swap", swap},
 		{"add", add},
+		{"sub", sub},
 		{"nop", nop},
 		{NULL, NULL},
 	};
