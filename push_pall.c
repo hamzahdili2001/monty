@@ -13,17 +13,10 @@ void push(stack_t **stack, unsigned int line_number)
 {
 	int value;
 	char *argument = data.argument;
-	stack_t *newNode = malloc(sizeof(stack_t));
 
 	if (argument == NULL)
 	{
 		fprintf(stderr, "L%u: usage: push integer\n", line_number);
-		exit(EXIT_FAILURE);
-	}
-
-	if (newNode == NULL)
-	{
-		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
 
@@ -32,15 +25,10 @@ void push(stack_t **stack, unsigned int line_number)
 		fprintf(stderr, "L%u: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-
-	newNode->n = value;
-	newNode->prev = NULL;
-	newNode->next = *stack;
-
-	if (*stack != NULL)
-		(*stack)->prev = newNode;
-
-	*stack = newNode;
+	if (data.op == 0)
+		add_to_stack(stack, value);
+	else
+		add_to_queue(stack, value);
 }
 
 /**
