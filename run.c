@@ -23,6 +23,10 @@ int run(char *line, stack_t **stack, unsigned int line_number,
 	opcode = strtok(line, " \t\n");
 	data.argument = strtok(NULL, " \t\n");
 
+	/* Check if the line is a comment */
+	if (line[0] == '#')
+		return (0);
+
 	if (opcode != NULL)
 	{
 		while (opcodes[i].opcode != NULL)
