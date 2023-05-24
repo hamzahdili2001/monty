@@ -9,15 +9,17 @@
 void pstr(stack_t **stack, unsigned int line_number)
 {
 	stack_t *current = *stack;
+	char str[1024];
+	int i = 0;
 
 	(void)line_number;
-	while (current != NULL)
+	while (current != NULL && current->n != 0 && current->n > 0
+		&& current->n <= 127)
 	{
-		if (current->n > 127 || current->n <= 0)
-			break;
-
-		printf("%c", current->n);
+		str[i] = current->n;
+		i++;
 		current = current->next;
 	}
-	printf("\n");
+	str[i] = '\0';
+	printf("%s\n", str);
 }
