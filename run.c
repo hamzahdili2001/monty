@@ -16,6 +16,7 @@ int run(char *line, stack_t **stack, unsigned int line_number,
 		{"pop", pop}, {"swap", swap}, {"add", add}, {"sub", sub},
 		{"div", divide}, {"nop", nop}, {"mul", mul}, {"mod", mod},
 		{"pchar", pchar}, {"pstr", pstr}, {"rotl", rotl}, {"rotr", rotr},
+		{"stack", stack_c}, {"queue", queue_c},
 		{NULL, NULL},
 	};
 	char *opcode;
@@ -23,11 +24,9 @@ int run(char *line, stack_t **stack, unsigned int line_number,
 
 	opcode = strtok(line, " \t\n");
 	data.argument = strtok(NULL, " \t\n");
-
 	/* Check if the line is a comment */
 	if (opcode && opcode[0] == '#')
 		return (0);
-
 	if (opcode != NULL)
 	{
 		while (opcodes[i].opcode != NULL)
@@ -40,7 +39,6 @@ int run(char *line, stack_t **stack, unsigned int line_number,
 			i++;
 		}
 	}
-
 	if (opcode && opcodes[i].opcode == NULL)
 	{
 		fprintf(stderr, "L%u: unknown instruction %s\n",
