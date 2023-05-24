@@ -19,9 +19,6 @@ void swap(stack_t **stack, unsigned int line_number)
 
 	if (length < 2)
 	{
-		free(data.line);
-		fclose(data.bytecode_file);
-		clean_s(*stack);
 		error(EXIT_FAILURE, "L%u: can't swap, stack too short\n",
 				(void *)&line_number, 'u');
 	}
